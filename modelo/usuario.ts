@@ -21,7 +21,7 @@ export var usuarioSchema: Schema = new Schema({
     nombre: { type: String, required:[ true, 'El nombre es necesario']},
     apellidoP: { type: String, required:[ true, 'El apellido es necesario']},
     apellidoM: { type: String, required:[ true, 'El apellido materno es necesario']},
-    casa_num: { type: String, required: [ true, 'El numero de casa es necesario']},
+    casa_num: { type: String, unique: true, required: [ true, 'El numero de casa es necesario']},
     tel_casa: { type: String, required: [ false] },
     celular: { type: String, required: [ true, ' El numero de celular es necesaio']},
     email: { type: String, unique: true, required: [ true, ' EL correo es necesario']},
@@ -36,3 +36,5 @@ export var usuarioSchema: Schema = new Schema({
 );
 
 usuarioSchema.plugin(uniqueValidator, { message: '{ PATH } debe ser unico ' });
+
+export const Usuario: Model<IUsuarioModel> = model <IUsuarioModel> ("Usuario", usuarioSchema);
